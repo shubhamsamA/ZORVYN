@@ -1,6 +1,25 @@
 # ZORVYN
 
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+
 ZORVYN is a Node.js and Express-based backend application for managing financial transactions. It features a robust Role-Based Access Control (RBAC) system, allowing different levels of access for `viewer`, `analyst`, and `admin` roles. The application provides RESTful APIs for user management, transaction tracking, and dashboard summaries.
+
+## Table of Contents
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture Diagram](#architecture-diagram)
+- [Workflow](#workflow)
+- [File and Folder Structure](#file-and-folder-structure)
+- [Setup Process](#setup-process)
+- [Testing with Postman or Client](#testing-with-postman-or-client)
+- [Standard Response Formats](#standard-response-formats)
+- [API Explanation & Examples](#api-explanation--examples)
+- [Assumptions Made](#assumptions-made)
+- [Tradeoffs Considered](#tradeoffs-considered)
+- [Future Improvements](#future-improvements)
 
 ## Features
 
@@ -106,17 +125,66 @@ ZORVYN/
    node server.js
    ```
 
+5. **Seed an Admin User (Optional but recommended for testing)**:
+   To quickly test admin-only routes, run the seed script to create a default admin account.
+   ```bash
+   npm run seed
+   ```
+   *Credentials created:*
+   - **Email**: `admin@zorvyn.com`
+   - **Password**: `admin123`
+
 The server will start running on `http://localhost:3000` (or the port specified in your `.env`).
 
 ## Testing with Postman or Client
 
-Before testing the APIs, keep these general rules in mind:
+> 💡 **Pro Tip**: We have included a pre-configured Postman collection to make testing easier! 
+> 1. Open Postman.
+> 2. Click **Import** and select the `ZORVYN_Postman_Collection.json` file from the root of this repository.
+> 3. The collection includes all routes, pre-filled JSON bodies, and variables for `baseUrl`, `userId`, and `transactionId`.
+
+Before testing the APIs manually, keep these general rules in mind:
 1. **Base URL**: Assume all endpoints are prefixed with `http://localhost:3000` (or your configured port).
 2. **Headers**: For requests with a JSON body (`POST`, `PUT`, `PATCH`), always set the header:
    - `Content-Type: application/json`
 3. **Authentication (Cookies)**: 
    - **Postman**: When you hit the `/api/auth/login` endpoint, Postman automatically saves the `token` cookie. Subsequent requests will automatically include this cookie.
    - **Client (Axios/Fetch)**: Ensure you set `withCredentials: true` (Axios) or `credentials: 'include'` (Fetch) so the browser sends the HTTP-only cookie with every request.
+
+---
+
+## Standard Response Formats
+
+To help client-side developers integrate smoothly, ZORVYN follows a predictable response structure.
+
+**Success Response (Single Object)**:
+```json
+{
+  "message": "Operation successful message",
+  "user": {
+    "id": "...",
+    "username": "...",
+    "email": "...",
+    "role": "..."
+  }
+}
+```
+
+**Success Response (List/Array)**:
+Endpoints returning multiple items (like `GET /api/users`) return a direct JSON array:
+```json
+[
+  { "id": "...", "username": "..." },
+  { "id": "...", "username": "..." }
+]
+```
+
+**Error Response**:
+```json
+{
+  "message": "Description of the error (e.g., Invalid credentials, Unauthorized)"
+}
+```
 
 ---
 
@@ -269,3 +337,11 @@ Before testing the APIs, keep these general rules in mind:
    - *Tradeoff*: This makes the RBAC implementation simple and fast but less flexible. Adding new roles or granular permissions would require modifying the schema and middleware code rather than just updating a database table.
 3. **Admin-Centric Transaction Creation**: Currently, only admins can create transactions. 
    - *Tradeoff*: This ensures strict control over financial records but might be a bottleneck if the system is intended for users to log their own expenses.
+
+## Future Improvements
+
+To further enhance the system design and production readiness, the following improvements are recommended:
+- **Security Enhancements**: Integrate `helmet` for setting secure HTTP headers and `express-rate-limit` to prevent brute-force attacks on the `/api/auth` routes.
+- **Input Validation**: Add a validation layer (e.g., `Joi` or `express-validator`) to sanitize and strictly validate incoming request payloads before they reach the controllers.
+- **Centralized Error Handling**: Implement a global error-handling middleware to catch unhandled promise rejections and standardize all error responses.
+- **Pagination Metadata**: Enhance array responses to include pagination metadata (e.g., `totalItems`, `totalPages`, `currentPage`) alongside the data array.
