@@ -216,10 +216,11 @@ Endpoints returning multiple items (like `GET /api/users`) return a direct JSON 
   }
   ```
 
-### Users (`/api/users`) - *Admin Only*
+### Users (`/api/users`) - *Admin (and Analyst for specific routes)*
 
 #### 1. Create a new user
 - **Endpoint**: `POST /api/users`
+- **Role**: Admin only
 - **Postman/Client Body (JSON)**:
   ```json
   {
@@ -232,10 +233,17 @@ Endpoints returning multiple items (like `GET /api/users`) return a direct JSON 
 
 #### 2. Retrieve all users
 - **Endpoint**: `GET /api/users`
+- **Role**: Admin only
 - **Usage**: Send a simple `GET` request. Ensure your admin cookie is attached.
 
-#### 3. Update user details
+#### 3. Retrieve a specific user
+- **Endpoint**: `GET /api/users/:id`
+- **Role**: Admin, Analyst
+- **Example URL**: `http://localhost:3000/api/users/65abc123def4567890abcdef`
+
+#### 4. Update user details
 - **Endpoint**: `PUT /api/users/:id`
+- **Role**: Admin only
 - **Example URL**: `http://localhost:3000/api/users/65abc123def4567890abcdef`
 - **Postman/Client Body (JSON)**:
   ```json
@@ -245,12 +253,14 @@ Endpoints returning multiple items (like `GET /api/users`) return a direct JSON 
   }
   ```
 
-#### 4. Delete a user
+#### 5. Delete a user
 - **Endpoint**: `DELETE /api/users/:id`
+- **Role**: Admin only
 - **Example URL**: `http://localhost:3000/api/users/65abc123def4567890abcdef`
 
-#### 5. Change a user's role
+#### 6. Change a user's role
 - **Endpoint**: `PATCH /api/users/:id/role`
+- **Role**: Admin only
 - **Example URL**: `http://localhost:3000/api/users/65abc123def4567890abcdef/role`
 - **Postman/Client Body (JSON)**:
   ```json

@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get("/summary", auth, authorize(["admin", "analyst", "viewer"]), dashboardController.getSummary);
 router.get("/user/:userId", auth, authorize(["admin", "analyst"]), dashboardController.getsummaryByUserId);
+router.get("/users", auth,authorize(["admin", "analyst"]), dashboardController.getsummaryByUserId);
 
 
 export default router;

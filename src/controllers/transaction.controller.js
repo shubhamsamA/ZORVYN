@@ -76,7 +76,7 @@ export const getTransactions = async (req, res) => {
       filter.userId = userId;
     }
 
-    // filters
+
     if (type) filter.type = type;
     if (category) filter.category = category;
 

@@ -62,20 +62,29 @@ import mongoose from "mongoose";
 
 const getsummaryByUserId = async (req, res) => {
   try {
-    const userId = new mongoose.Types.ObjectId(req.params.userId);  
+    let match = {};
+
+    if (req.params.userId) {
+      match.userId = new mongoose.Types.ObjectId(req.params.userId);
+    }
+
     const income = await Transaction.aggregate([
-      { $match: { userId, type: "income" } },
+      { $match: { ...match, type: "income" } },
       { $group: { _id: null, total: { $sum: "$amount" } } }
     ]);
+
+
     const expense = await Transaction.aggregate([
-      { $match: { userId, type: "expense" } },
+      { $match: { ...match, type: "expense" } },
       { $group: { _id: null, total: { $sum: "$amount" } } }
     ]);
+
     const totalIncome = income[0]?.total || 0;
-    const totalExpense = expense[0]?.total || 0; 
-    
+    const totalExpense = expense[0]?.total || 0;
+
+
     const categoryBreakdown = await Transaction.aggregate([
-      { $match: { userId } },
+      { $match: match },
       {
         $group: {
           _id: "$category",
@@ -84,20 +93,20 @@ const getsummaryByUserId = async (req, res) => {
       }
     ]);
 
-    const recent = await Transaction.find({ userId })
+    const recent = await Transaction.find(match)
       .sort({ date: -1 })
-      .limit(5);  
-    
-      const monthly = await Transaction.aggregate([
-        { $match: { userId } },
-        {
-          $group: {
-            _id: { $month: "$date" },
-            total: { $sum: "$amount" }
-          }
-        },
-        { $sort: { "_id": 1 } }
-      ]);
+      .limit(5);
+
+    const monthly = await Transaction.aggregate([
+      { $match: match },
+      {
+        $group: {
+          _id: { $month: "$date" },
+          total: { $sum: "$amount" }
+        }
+      },
+      { $sort: { "_id": 1 } }
+    ]);
 
     res.status(200).json({
       totalIncome,
@@ -107,6 +116,7 @@ const getsummaryByUserId = async (req, res) => {
       recentTransactions: recent,
       monthlyTrends: monthly
     });
+
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

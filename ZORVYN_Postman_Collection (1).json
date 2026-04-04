@@ -106,7 +106,7 @@
       ]
     },
     {
-      "name": "Users (Admin Only)",
+      "name": "Users (Admin & Analyst)",
       "item": [
         {
           "name": "Create User",
@@ -144,6 +144,22 @@
               ],
               "path": [
                 "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Specific User",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "{{userId}}"
               ]
             }
           }
@@ -248,7 +264,7 @@
           }
         },
         {
-          "name": "Get All Transactions",
+          "name": "Get Transactions filtered by type, category, pagination,userId, date.( admin and analyst)",
           "request": {
             "method": "GET",
             "url": {
