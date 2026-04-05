@@ -26,7 +26,7 @@
       "name": "Auth",
       "item": [
         {
-          "name": "Register",
+          "name": "Register (Admin/Analyst/viewer)",
           "request": {
             "method": "POST",
             "header": [
@@ -52,7 +52,7 @@
           }
         },
         {
-          "name": "Login",
+          "name": "Login (Admin/Analyst/viewer)",
           "request": {
             "method": "POST",
             "header": [
@@ -106,7 +106,7 @@
       ]
     },
     {
-      "name": "Users (Admin & Analyst)",
+      "name": "Users (Admin)",
       "item": [
         {
           "name": "Create User",
@@ -264,7 +264,7 @@
           }
         },
         {
-          "name": "Get Transactions filtered by type and category",
+          "name": "Get Transactions filtered by type and category (Admin/Analyst)",
           "request": {
             "method": "GET",
             "url": {
@@ -289,7 +289,7 @@
           }
         },
         {
-          "name": "Get Transactions filtered by userId",
+          "name": "Get Transactions filtered by userId (Admin/Analyst)",
           "request": {
             "method": "GET",
             "url": {
@@ -310,7 +310,7 @@
           }
         },
         {
-          "name": "Get Transactions filtered by date range",
+          "name": "Get Transactions filtered by date range (Admin/Analyst)",
           "request": {
             "method": "GET",
             "url": {
@@ -335,7 +335,7 @@
           }
         },
         {
-          "name": "Get Transactions with pagination",
+          "name": "Get Transactions with pagination (Admin/Analyst)",
           "request": {
             "method": "GET",
             "url": {
@@ -447,7 +447,7 @@
           }
         },
         {
-          "name": "Get My Transactions",
+          "name": "Get My Transactions (admin/analyst)",
           "request": {
             "method": "GET",
             "url": {
@@ -468,7 +468,7 @@
       "name": "Dashboard",
       "item": [
         {
-          "name": "Get Summary",
+          "name": "Get Summary (Admin/Analyst/viewer)",
           "request": {
             "method": "GET",
             "url": {

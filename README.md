@@ -5,7 +5,7 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
-ZORVYN is a Node.js and Express-based backend application for managing financial transactions. It features a robust Role-Based Access Control (RBAC) system, allowing different levels of access for `viewer`, `analyst`, and `admin` roles. The application provides RESTful APIs for user management, transaction tracking, and dashboard summaries.
+It is a Node.js and Express-based backend application for managing financial transactions. It features a robust Role-Based Access Control (RBAC) system, allowing different levels of access for `viewer`, `analyst`, and `admin` roles. The application provides RESTful APIs for user management, transaction tracking, and dashboard summaries.
 
 ## Table of Contents
 - [Features](#features)
@@ -70,6 +70,8 @@ ZORVYN/
 ├── package.json              # Project dependencies and scripts
 ├── .env.example              # Example environment variables
 ├── README.md                 # Project documentation
+├── ZORVYN_Postman_Collection (1).json # Postman collection for testing APIs
+├── seed.js                   # Database seeding script
 └── src/
     ├── app.js                # Express app setup and route registration
     ├── db/
@@ -155,7 +157,7 @@ Before testing the APIs manually, keep these general rules in mind:
 
 ## Standard Response Formats
 
-To help client-side developers integrate smoothly, ZORVYN follows a predictable response structure.
+To help client-side developers integrate smoothly, It follows a predictable response structure.
 
 **Success Response (Single Object)**:
 ```json
