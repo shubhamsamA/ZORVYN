@@ -26,7 +26,7 @@
       "name": "Auth",
       "item": [
         {
-          "name": "Register (Admin/Analyst/viewer)",
+          "name": "Register",
           "request": {
             "method": "POST",
             "header": [
@@ -52,7 +52,7 @@
           }
         },
         {
-          "name": "Login (Admin/Analyst/viewer)",
+          "name": "Login",
           "request": {
             "method": "POST",
             "header": [
@@ -102,11 +102,27 @@
               ]
             }
           }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            }
+          }
         }
       ]
     },
     {
-      "name": "Users (Admin)",
+      "name": "Users (Admin & Analyst)",
       "item": [
         {
           "name": "Create User",
@@ -264,7 +280,7 @@
           }
         },
         {
-          "name": "Get Transactions filtered by type and category (Admin/Analyst)",
+          "name": "Get Transactions filtered by type and category",
           "request": {
             "method": "GET",
             "url": {
@@ -289,7 +305,7 @@
           }
         },
         {
-          "name": "Get Transactions filtered by userId (Admin/Analyst)",
+          "name": "Get Transactions filtered by userId",
           "request": {
             "method": "GET",
             "url": {
@@ -310,7 +326,7 @@
           }
         },
         {
-          "name": "Get Transactions filtered by date range (Admin/Analyst)",
+          "name": "Get Transactions filtered by date range",
           "request": {
             "method": "GET",
             "url": {
@@ -335,7 +351,7 @@
           }
         },
         {
-          "name": "Get Transactions with pagination (Admin/Analyst)",
+          "name": "Get Transactions with pagination",
           "request": {
             "method": "GET",
             "url": {
@@ -447,7 +463,7 @@
           }
         },
         {
-          "name": "Get My Transactions (admin/analyst)",
+          "name": "Get My Transactions",
           "request": {
             "method": "GET",
             "url": {
@@ -468,7 +484,7 @@
       "name": "Dashboard",
       "item": [
         {
-          "name": "Get Summary (Admin/Analyst/viewer)",
+          "name": "Get Summary",
           "request": {
             "method": "GET",
             "url": {
@@ -484,7 +500,7 @@
           }
         },
         {
-          "name": "Get User Summary (Admin/Analyst)",
+          "name": "Get User Summary",
           "request": {
             "method": "GET",
             "url": {
@@ -501,7 +517,7 @@
           }
         },
         {
-          "name": "Get All Users Summary (Admin/Analyst)",
+          "name": "Get All Users Summary",
           "request": {
             "method": "GET",
             "url": {

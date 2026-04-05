@@ -217,6 +217,11 @@ Endpoints returning multiple items (like `GET /api/users`) return a direct JSON 
     "password": "securepassword123"
   }
   ```
+  
+  #### 3. Logout
+- **Endpoint**: `POST /api/auth/logout`
+- **Role**: Public (Authenticated)
+- **Description**: Clears the HTTP-only JWT cookie to log the user out.
 
 ### Users (`/api/users`) - *Admin (and Analyst for specific routes)*
 
