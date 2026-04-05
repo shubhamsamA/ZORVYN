@@ -264,11 +264,107 @@
           }
         },
         {
-          "name": "Get Transactions filtered by type, category, pagination,userId, date.( admin and analyst)",
+          "name": "Get Transactions filtered by type and category",
           "request": {
             "method": "GET",
             "url": {
-              "raw": "{{baseUrl}}/transactions?type=expense&category=food&page=1&limit=10",
+              "raw": "{{baseUrl}}/transactions?type=expense&category=food",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "transactions"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "expense"
+                },
+                {
+                  "key": "category",
+                  "value": "food"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Transactions filtered by userId",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/transactions?userId={{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "transactions"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Transactions filtered by date range",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/transactions?startDate=2026-01-01&endDate=2026-12-31",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "transactions"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2026-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-12-31"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Transactions with pagination",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/transactions?page=1&limit=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "transactions"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Transactions filtered by all parameters (Admin/Analyst)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/transactions?type=expense&category=food&page=1&limit=10&userId={{userId}}&startDate=2026-01-01&endDate=2026-12-31",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -291,6 +387,18 @@
                 {
                   "key": "limit",
                   "value": "10"
+                },
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                },
+                {
+                  "key": "startDate",
+                  "value": "2026-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-12-31"
                 }
               ]
             }
@@ -388,6 +496,22 @@
                 "dashboard",
                 "user",
                 "{{userId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Users Summary",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/dashboard/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dashboard",
+                "users"
               ]
             }
           }

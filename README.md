@@ -332,13 +332,19 @@ Endpoints returning multiple items (like `GET /api/users`) return a direct JSON 
 - **Role**: Admin, Analyst
 - **Example URL**: `http://localhost:3000/api/dashboard/user/65abc123def4567890abcdef`
 
+#### 3. Get financial summary for all users
+- **Endpoint**: `GET /api/dashboard/users`
+- **Role**: Admin, Analyst
+- **Usage**: Send a simple `GET` request. Retrieves summaries for all users.
+
 ## Assumptions Made
 
 1. **Cookie-Based Authentication**: The application assumes that clients can handle and send cookies, as the JWT token is extracted from `req.cookies.token`.
 2. **Default Role**: New users registered via the `/api/auth/register` endpoint are automatically assigned the `viewer` role. An `admin` must manually elevate their privileges if needed.
 3. **Database Structure**: It is assumed that MongoDB is used and the connection string provided in `MONGO_URI` is valid and accessible.
 4. **Transaction Categories**: Transactions are strictly categorized into predefined enums (`salary`, `freelance`, `food`, `rent`, `shopping`, `travel`, `health`, `education`, `other`).
-
+5. **Soft Deletion**: Deleting a user does not remove them from the database; it sets their `isActive` flag to `false`.
+6. **Dashboard Scope**: The `/api/dashboard/summary` endpoint aggregates data for the currently authenticated user, not the entire system.
 ## Tradeoffs Considered
 
 1. **Cookie vs. Bearer Token**: The application uses cookies for JWT storage. 
@@ -347,6 +353,8 @@ Endpoints returning multiple items (like `GET /api/users`) return a direct JSON 
    - *Tradeoff*: This makes the RBAC implementation simple and fast but less flexible. Adding new roles or granular permissions would require modifying the schema and middleware code rather than just updating a database table.
 3. **Admin-Centric Transaction Creation**: Currently, only admins can create transactions. 
    - *Tradeoff*: This ensures strict control over financial records but might be a bottleneck if the system is intended for users to log their own expenses.
+4. **Soft Deletion vs. Hard Deletion**: Users are soft-deleted (`isActive: false`) rather than permanently removed from the database.
+   - *Tradeoff*: This preserves transaction history and referential integrity, preventing orphaned records, but requires filtering out inactive users in queries and uses more storage over time.   
 
 ## Future Improvements
 
