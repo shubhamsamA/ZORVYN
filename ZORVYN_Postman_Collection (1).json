@@ -484,7 +484,7 @@
           }
         },
         {
-          "name": "Get User Summary",
+          "name": "Get User Summary (Admin/Analyst)",
           "request": {
             "method": "GET",
             "url": {
@@ -501,7 +501,7 @@
           }
         },
         {
-          "name": "Get All Users Summary",
+          "name": "Get All Users Summary (Admin/Analyst)",
           "request": {
             "method": "GET",
             "url": {
